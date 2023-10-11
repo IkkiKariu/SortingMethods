@@ -1,0 +1,15 @@
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.csproj.AssemblyReference.cache
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.AssemblyInfoInputs.cache
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.AssemblyInfo.cs
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.csproj.CoreCompileInputs.cache
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\bin\Debug\net6.0\SortingMethods.exe
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\bin\Debug\net6.0\SortingMethods.deps.json
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\bin\Debug\net6.0\SortingMethods.runtimeconfig.json
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\bin\Debug\net6.0\SortingMethods.dll
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\bin\Debug\net6.0\SortingMethods.pdb
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.dll
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\refint\SortingMethods.dll
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.pdb
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\SortingMethods.genruntimeconfig.cache
+D:\Programs\Projects\cs\SortingMethods\SortingMethods\obj\Debug\net6.0\ref\SortingMethods.dll
