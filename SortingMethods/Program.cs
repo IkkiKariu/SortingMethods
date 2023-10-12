@@ -7,15 +7,20 @@ namespace SortingMethods
     {
         static void Main(string[] args)
         {
-            // array initializing
-            var randomArr = InitializeArray(10);
+            // arrays initializing
+            var randomArr = InitializeArray(11);
+
+            var orderedArr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             // displaying given array
             DisplayArray(randomArr);
             Console.WriteLine("-----------------------");
 
-            // Displaying sorted array by 'Bubble Sort'
+            /* Displaying sorted array 
             DisplayArray(ShellSortMethod(randomArr));
+            */
+            
+            DisplayArray(CustomSelectionSort(randomArr));
         }
 
         public static int[] InitializeArray(int capacity)
@@ -90,6 +95,44 @@ namespace SortingMethods
                     }
                     array[j] = value;
                 }
+            return array;
+        }
+
+        public static int[] CustomSelectionSort(int[] array)
+        {
+            int step = 2;
+
+            for (int n = 0; n < step; n++)
+            {
+                for (int i = n + step; i < array.Length; i += step)
+                {
+                    int index = i;
+                    int value = array[i];
+
+                    if (n % 2 == 0)
+                    {
+                        while((index >= 0 + n + step) && (value > array[index - step]))
+                        {
+                            int tmp = array[index];
+                            array[index] = array[index - step];
+                            index -= step;
+                        }
+                        array[index] = value;
+                    }else
+                    {
+                        while ((index >= 0 + n + step) && (value < array[index - step]))
+                        {
+                            int tmp = array[index];
+                            array[index] = array[index - step];
+                            index -= step;
+                        }
+                        array[index] = value;
+                    }
+                    if (i == array.Length || i == array.Length - 1)
+                        break;
+                }
+            }
+
             return array;
         }
     }
