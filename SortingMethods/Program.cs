@@ -11,7 +11,7 @@ namespace SortingMethods
             int[] ascendingOrderedArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int[] descendingOrderedArray = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
 
-            CompareComplexity(InitializeArray(capacity: 10), "random array");
+            CompareComplexity(descendingOrderedArray, "random array");
         }
 
         public static void CompareComplexity(int[] array, string arrayType)
@@ -34,7 +34,6 @@ namespace SortingMethods
             DisplayArray(sortedArray1);
 
 
-            Console.WriteLine($"Length of givenArray: {array.Length}");
             Console.WriteLine($"Comparisons: {bubbleSortAlgorithm.ComparisonCounter}; Assignments: {bubbleSortAlgorithm.AssignmentCounter}");
 
 
@@ -49,8 +48,6 @@ namespace SortingMethods
             Console.WriteLine("After sorting:\n");
             DisplayArray(sortedArray2);
 
-
-            Console.WriteLine($"Length of givenArray: {array.Length}");
             Console.WriteLine($"Comparisons: {inclusionSortAlgorithm.ComparisonCounter}; Assignments: {inclusionSortAlgorithm.AssignmentCounter}");
 
 
@@ -65,8 +62,6 @@ namespace SortingMethods
             Console.WriteLine("After sorting:\n");
             DisplayArray(sortedArray3);
 
-
-            Console.WriteLine($"Length of givenArray: {array.Length}");
             Console.WriteLine($"Comparisons: {shellSortAlgorithm.ComparisonCounter}; Assignments: {shellSortAlgorithm.AssignmentCounter}");
 
 
@@ -81,8 +76,6 @@ namespace SortingMethods
             Console.WriteLine("After sorting:\n");
             DisplayArray(sortedArray4);
 
-
-            Console.WriteLine($"Length of givenArray: {array.Length}");
             Console.WriteLine($"Comparisons: {heapSortAlgorithm.ComparisonCounter}; Assignments: {heapSortAlgorithm.AssignmentCounter}");
 
 
@@ -97,8 +90,6 @@ namespace SortingMethods
             Console.WriteLine("After sorting:\n");
             DisplayArray(sortedArray5);
 
-
-            Console.WriteLine($"Length of givenArray: {array.Length}");
             Console.WriteLine($"Comparisons: {quickSortAlgorithm.ComparisonCounter}; Assignments: {quickSortAlgorithm.AssignmentCounter}");
         }
 
@@ -135,18 +126,11 @@ namespace SortingMethods
         {
             array = (int[])array.Clone();
 
-            ComparisonCounter++;
-            AssignmentCounter++;
             for (int n = 1; n <= array.Length; n++)
             {
-                ComparisonCounter++;
-                AssignmentCounter++;
-
                 for (int i = 0; i < array.Length - 1; ++i)
                 {
-                    AssignmentCounter++;
-                    ComparisonCounter += 2;
-
+                    ComparisonCounter++;
                     if (array[i] > array[i + 1])
                     {
                         AssignmentCounter += 3;
@@ -171,23 +155,19 @@ namespace SortingMethods
         {
             array = (int[])array.Clone();
 
-            ComparisonCounter++;
-            AssignmentCounter++;
             for (int i = 1; i < array.Length; i++)
             {
-                ComparisonCounter++;
-                AssignmentCounter += 3;
                 var index = i;
                 var value = array[i];
 
-
+                ComparisonCounter++;
                 while ((index > 0) && (value < array[index - 1]))
                 {
-                    ComparisonCounter += 2;
                     AssignmentCounter++;
                     array[index] = array[index - 1];
                     index--;
                 }
+
                 AssignmentCounter++;
                 array[index] = value;
             }
@@ -209,28 +189,17 @@ namespace SortingMethods
 
             int j;
 
-            ComparisonCounter++;
-            AssignmentCounter++;
             for (int step = array.Length / 2; step > 0; step /= 2)
             {
-                ComparisonCounter++;
-                AssignmentCounter++;
-
                 for (int i = step; i < array.Length; i++)
                 {
-                    ComparisonCounter++;
-                    AssignmentCounter++;
-
                     int value = array[i];
                     for (j = i; j >= step; j -= step)
                     {
                         ComparisonCounter++;
-                        AssignmentCounter += 2;
-
                         if (value < array[j - step])
                         {
                             AssignmentCounter++;
-
                             array[j] = array[j - step];
                         }
                         else
@@ -238,8 +207,7 @@ namespace SortingMethods
                             break;
                         }
                     }
-                    AssignmentCounter += 1;
-
+                    AssignmentCounter++;
                     array[j] = value;
                 }
             }
@@ -300,29 +268,16 @@ namespace SortingMethods
         {
             arr = (int[])arr.Clone();
 
-            AssignmentCounter += 1;
-
             int n = arr.Length;
-
-            ComparisonCounter++;
-            AssignmentCounter++;
 
             for (int i = n / 2 - 1; i >= 0; i--)
             {
                 Heapify(arr, n, i);
-
-                ComparisonCounter++;
-                AssignmentCounter++;
             }
-
-            ComparisonCounter++;
-            AssignmentCounter++;
 
             for (int i = n - 1; i >= 0; i--)
             {
-                ComparisonCounter++;
-                AssignmentCounter += 4;
-
+                AssignmentCounter += 3;
                 int temp = arr[0];
                 arr[0] = arr[i];
                 arr[i] = temp;
@@ -336,8 +291,6 @@ namespace SortingMethods
 
         void Heapify(int[] arr, int n, int i)
         {
-            AssignmentCounter += 3;
-
             int largest = i;
             int left = 2 * i + 1; 
             int right = 2 * i + 2;
@@ -345,18 +298,15 @@ namespace SortingMethods
             ComparisonCounter++;
             if (left < n && arr[left] > arr[largest])
             {
-                AssignmentCounter++;
                 largest = left;
             }
 
             ComparisonCounter++;
             if (right < n && arr[right] > arr[largest])
             {
-                AssignmentCounter++;
                 largest = right;
             }
 
-            ComparisonCounter++;
             if (largest != i)
             {
 
@@ -379,13 +329,19 @@ namespace SortingMethods
 
         public int[] QuickSort(int[] arr, int left, int right)
         {
+            ComparisonCounter++;
             if (left < right)
             {
+                AssignmentCounter++;
                 int pivot = Partition(arr, left, right);
+
+                ComparisonCounter++;
                 if (pivot > 1)
                 {
                     QuickSort(arr, left, pivot - 1);
                 }
+
+                ComparisonCounter++;
                 if (pivot + 1 < right)
                 {
                     QuickSort(arr, pivot + 1, right);
@@ -397,20 +353,31 @@ namespace SortingMethods
 
         private int Partition(int[] arr, int left, int right)
         {
+            AssignmentCounter++;
             int pivot = arr[left];
             while (true)
             {
+                ComparisonCounter++;
                 while (arr[left] < pivot)
                 {
+                    ComparisonCounter++;
                     left++;
                 }
+
+                ComparisonCounter++;
                 while (arr[right] > pivot)
                 {
+                    ComparisonCounter++;
                     right--;
                 }
+
+                ComparisonCounter++;
                 if (left < right)
                 {
+                    ComparisonCounter++;
                     if (arr[left] == arr[right]) return right;
+
+                    AssignmentCounter += 3;
                     int temp = arr[left];
                     arr[left] = arr[right];
                     arr[right] = temp;
