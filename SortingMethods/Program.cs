@@ -160,9 +160,11 @@ namespace SortingMethods
                 var index = i;
                 var value = array[i];
 
-                ComparisonCounter++;
+                ComparisonCounter++; //last loop comparison
                 while ((index > 0) && (value < array[index - 1]))
                 {
+                    ComparisonCounter++;
+
                     AssignmentCounter++;
                     array[index] = array[index - 1];
                     index--;
@@ -191,9 +193,12 @@ namespace SortingMethods
 
             for (int step = array.Length / 2; step > 0; step /= 2)
             {
+                ComparisonCounter++;
+
                 for (int i = step; i < array.Length; i++)
                 {
                     int value = array[i];
+
                     for (j = i; j >= step; j -= step)
                     {
                         ComparisonCounter++;
@@ -329,19 +334,15 @@ namespace SortingMethods
 
         public int[] QuickSort(int[] arr, int left, int right)
         {
-            ComparisonCounter++;
             if (left < right)
             {
-                AssignmentCounter++;
                 int pivot = Partition(arr, left, right);
 
-                ComparisonCounter++;
                 if (pivot > 1)
                 {
                     QuickSort(arr, left, pivot - 1);
                 }
 
-                ComparisonCounter++;
                 if (pivot + 1 < right)
                 {
                     QuickSort(arr, pivot + 1, right);
@@ -353,25 +354,23 @@ namespace SortingMethods
 
         private int Partition(int[] arr, int left, int right)
         {
-            AssignmentCounter++;
             int pivot = arr[left];
             while (true)
             {
-                ComparisonCounter++;
+                //ComparisonCounter++; // last loop comparison
                 while (arr[left] < pivot)
                 {
-                    ComparisonCounter++;
+                    //ComparisonCounter++;
                     left++;
                 }
 
-                ComparisonCounter++;
+                //ComparisonCounter++; //last loop comparison
                 while (arr[right] > pivot)
                 {
-                    ComparisonCounter++;
+                    //ComparisonCounter++;
                     right--;
                 }
 
-                ComparisonCounter++;
                 if (left < right)
                 {
                     ComparisonCounter++;
