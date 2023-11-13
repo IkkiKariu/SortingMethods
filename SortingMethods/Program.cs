@@ -11,90 +11,11 @@ namespace SortingMethods
             int[] ascendingOrderedArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int[] descendingOrderedArray = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
 
-            CompareComplexity(descendingOrderedArray, "random array");
+            Console.WriteLine("Bubble sort\n");
+            AnalyseComplexity(new BubbleSortAlgorithm(), descendingOrderedArray);
         }
 
-        public static void CompareComplexity(int[] array, string arrayType)
-        {
-            var bubbleSortAlgorithm = new BubbleSortAlgorithm();
-            var inclusionSortAlgorithm = new InclusionSortAlgorithm();
-            var shellSortAlgorithm = new ShellSortAlgorithm();
-            var heapSortAlgorithm = new HeapSortAlgorithm();
-            var quickSortAlgorithm = new QuickSortAlgorithm();
-
-            // BubbleSort
-            Console.WriteLine("Bubble sort:\n");
-
-            Console.WriteLine("Before sorting:\n");
-            DisplayArray(array);
-
-            int[] sortedArray1 = bubbleSortAlgorithm.BubbleSort(array);
-
-            Console.WriteLine("After sorting:\n");
-            DisplayArray(sortedArray1);
-
-
-            Console.WriteLine($"Comparisons: {bubbleSortAlgorithm.ComparisonCounter}; Assignments: {bubbleSortAlgorithm.AssignmentCounter}");
-
-
-            // InclusionSort
-            Console.WriteLine("Inclusion sort:\n");
-
-            Console.WriteLine("Before sorting:\n");
-            DisplayArray(array);
-
-            int[] sortedArray2 = inclusionSortAlgorithm.InclusionSort(array);
-
-            Console.WriteLine("After sorting:\n");
-            DisplayArray(sortedArray2);
-
-            Console.WriteLine($"Comparisons: {inclusionSortAlgorithm.ComparisonCounter}; Assignments: {inclusionSortAlgorithm.AssignmentCounter}");
-
-
-            // ShellSortMethod
-            Console.WriteLine("Shell sort method:\n");
-
-            Console.WriteLine("Before sorting:\n");
-            DisplayArray(array);
-
-            int[] sortedArray3 = shellSortAlgorithm.ShellSortMethod(array);
-
-            Console.WriteLine("After sorting:\n");
-            DisplayArray(sortedArray3);
-
-            Console.WriteLine($"Comparisons: {shellSortAlgorithm.ComparisonCounter}; Assignments: {shellSortAlgorithm.AssignmentCounter}");
-
-
-            // HeapSort
-            Console.WriteLine("Heap sort:\n");
-
-            Console.WriteLine("Before sorting:\n");
-            DisplayArray(array);
-
-            int[] sortedArray4 = heapSortAlgorithm.HeapSort(array);
-
-            Console.WriteLine("After sorting:\n");
-            DisplayArray(sortedArray4);
-
-            Console.WriteLine($"Comparisons: {heapSortAlgorithm.ComparisonCounter}; Assignments: {heapSortAlgorithm.AssignmentCounter}");
-
-
-            // QuickSort
-            Console.WriteLine("Quick sort:\n");
-
-            Console.WriteLine("Before sorting:\n");
-            DisplayArray(array);
-
-            int[] sortedArray5 = quickSortAlgorithm.QuickSort(array, 0, array.Length - 1);
-
-            Console.WriteLine("After sorting:\n");
-            DisplayArray(sortedArray5);
-
-            Console.WriteLine($"Comparisons: {quickSortAlgorithm.ComparisonCounter}; Assignments: {quickSortAlgorithm.AssignmentCounter}");
-        }
-
-
-        public static int[] InitializeArray(int capacity)
+        static int[] InitializeArray(int capacity)
         {
             int[] array = new int[capacity];
 
@@ -106,24 +27,54 @@ namespace SortingMethods
             return array;
         }
 
-        public static void DisplayArray(int[] array)
+        static void DisplayArray(int[] array)
         {
             // sorted array displaying
             for (int i = 0; i < array.Length; i++)
             {
-                Console.WriteLine($"{i} - {array[i]}");
+                Console.WriteLine($"[{i}] = {array[i]}");
             }
+        }
+
+        static void AnalyseComplexity(ISortingAlorithm sortingAlgorithm, int[] arrayForSorting)
+        {
+            Console.WriteLine("Before sorting:\n");
+            DisplayArray(arrayForSorting);
+            Console.WriteLine();
+
+            int[] sortedArray = sortingAlgorithm.Sort(arrayForSorting);
+
+            Console.WriteLine("After sorting:\n");
+            DisplayArray(sortedArray);
+            Console.WriteLine();
+
+            Console.WriteLine($"Comparisons: {sortingAlgorithm.ComparisonCounter}\tAssignments: {sortingAlgorithm.AssignmentCounter}\n\n");
         }
     }
 
-    class BubbleSortAlgorithm
+    interface ISortingAlorithm
+    {
+        int ComparisonCounter { get; }
+        int AssignmentCounter { get; }
+
+        int[] Sort(int[] array);
+    }
+
+    class BubbleSortAlgorithm : ISortingAlorithm 
     {
         public int ComparisonCounter { get; private set; } = 0;
         public int AssignmentCounter { get; private set; } = 0;
 
-
-        public int[] BubbleSort(int[] array)
+        private void ResetCounters()
         {
+            ComparisonCounter = 0;
+            AssignmentCounter = 0;
+        }
+
+        public int[] Sort(int[] array)
+        {
+            ResetCounters();
+
             array = (int[])array.Clone();
 
             for (int n = 1; n <= array.Length; n++)
@@ -145,14 +96,21 @@ namespace SortingMethods
     }
 
 
-    class InclusionSortAlgorithm
+    class InclusionSortAlgorithm : ISortingAlorithm
     {
         public int ComparisonCounter { get; private set; } = 0;
         public int AssignmentCounter { get; private set; } = 0;
 
-
-        public int[] InclusionSort(int[] array)
+        private void ResetCounters()
         {
+            ComparisonCounter = 0;
+            AssignmentCounter = 0;
+        }
+
+        public int[] Sort(int[] array)
+        {
+            ResetCounters();
+
             array = (int[])array.Clone();
 
             for (int i = 1; i < array.Length; i++)
@@ -179,14 +137,21 @@ namespace SortingMethods
     }
 
 
-    class ShellSortAlgorithm
+    class ShellSortAlgorithm : ISortingAlorithm
     {
         public int ComparisonCounter { get; private set; } = 0;
         public int AssignmentCounter { get; private set; } = 0;
 
-
-        public int[] ShellSortMethod(int[] array)
+        private void ResetCounters()
         {
+            ComparisonCounter = 0;
+            AssignmentCounter = 0;
+        }
+
+        public int[] Sort(int[] array)
+        {
+            ResetCounters();
+
             array = (int[])array.Clone();
 
             int j;
@@ -263,14 +228,21 @@ namespace SortingMethods
         }
     }
 
-    class HeapSortAlgorithm
+    class HeapSortAlgorithm : ISortingAlorithm
     {
         public int ComparisonCounter { get; private set; } = 0;
         public int AssignmentCounter { get; private set; } = 0;
 
-
-        public int[] HeapSort(int[] arr)
+        private void ResetCounters()
         {
+            ComparisonCounter = 0;
+            AssignmentCounter = 0;
+        }
+
+        public int[] Sort(int[] arr)
+        {
+            ResetCounters();
+
             arr = (int[])arr.Clone();
 
             int n = arr.Length;
@@ -326,26 +298,32 @@ namespace SortingMethods
 
     }
 
-    class QuickSortAlgorithm
+    class QuickSortAlgorithm 
     {
         public int ComparisonCounter { get; private set; } = 0;
         public int AssignmentCounter { get; private set; } = 0;
 
-
-        public int[] QuickSort(int[] arr, int left, int right)
+        private void ResetCounters()
         {
+            ComparisonCounter = 0;
+            AssignmentCounter = 0;
+        }
+        public int[] Sort(int[] arr, int left, int right)
+        {
+            ResetCounters();
+
             if (left < right)
             {
                 int pivot = Partition(arr, left, right);
 
                 if (pivot > 1)
                 {
-                    QuickSort(arr, left, pivot - 1);
+                    Sort(arr, left, pivot - 1);
                 }
 
                 if (pivot + 1 < right)
                 {
-                    QuickSort(arr, pivot + 1, right);
+                    Sort(arr, pivot + 1, right);
                 }
             }
 
